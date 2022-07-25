@@ -2,8 +2,13 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Header from '../components/Header'
 import Hero from '../components/Hero'
-
-const Home: NextPage = () => {
+import {sanityClient } from '../sanity'
+import {Post} from '../types'
+interface Props{ 
+  posts : [Post]
+}
+const Home:NextPage = ({posts} : Props) => {
+  console.log("The Props are : ",posts)
   return (
     <div className="">
       <Head>
@@ -12,8 +17,27 @@ const Home: NextPage = () => {
       </Head>
       <Header />
       <Hero/>
+
     </div>
   )
 }
-
+export const getServerSideProps = async () =>{
+  const query = `*[type == "post"]{
+    _id,
+    title,
+    author -> {
+      name,
+      image
+    },
+    description,
+    mainImage,
+    slug
+  }`
+  const posts = await sanityClient.fetch(query)
+  return {
+    props : {
+      posts,
+    }
+  }
+}
 export default Home
