@@ -22,7 +22,7 @@ const Home:NextPage = ({posts} : Props) => {
   )
 }
 export const getServerSideProps = async () =>{
-  const query = `*[type == "post"]{
+  const query = `*[_type == "post"]{
     _id,
     title,
     author -> {
