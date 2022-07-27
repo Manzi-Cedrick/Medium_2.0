@@ -1,6 +1,7 @@
 export interface Post{
+    [x: string]: Key | null | undefined;
     _id: string;
-    createdAt: Date;
+    createdAt: string;
     title: string;
     author: {
         name: string;
