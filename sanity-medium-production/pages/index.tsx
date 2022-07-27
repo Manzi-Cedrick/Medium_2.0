@@ -2,13 +2,14 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Header from '../components/Header'
 import Hero from '../components/Hero'
+import PostCard from '../components/PostCard'
 import {sanityClient } from '../sanity'
 import {Post} from '../types'
 interface Props{ 
   posts : [Post]
 }
 const Home:NextPage = ({posts} : Props) => {
-  console.log("The Props are : ",posts)
+
   return (
     <div className="">
       <Head>
@@ -17,7 +18,7 @@ const Home:NextPage = ({posts} : Props) => {
       </Head>
       <Header />
       <Hero/>
-
+      <PostCard posts={posts}/>
     </div>
   )
 }
